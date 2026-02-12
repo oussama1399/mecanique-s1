@@ -286,23 +286,43 @@
                     <div class="glass-card p-5 h-100">
                         <div class="section-tag mb-3">Chapitre 1</div>
                         <h3 class="h4 fw-bold text-violet mb-4">Outils Mathématiques et Cinématique</h3>
+                                                <!-- Schéma Chapitre 1 : Vecteurs et Trajectoire -->
+                                                <div class="text-center mb-4">
+                                                    <svg id="traj-anim" width="220" height="120" viewBox="0 0 220 120">
+                                                        <!-- Axes -->
+                                                        <line x1="30" y1="100" x2="200" y2="100" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrow)" />
+                                                        <line x1="30" y1="100" x2="30" y2="20" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrow)" />
+                                                        <!-- Trajectoire -->
+                                                        <path id="traj-path" d="M30,100 Q80,40 180,60" fill="none" stroke="#facc15" stroke-width="2" />
+                                                        <!-- Point mobile animé -->
+                                                        <circle id="moving-point" r="7" fill="#7c3aed" />
+                                                        <!-- Légende axes -->
+                                                        <text x="205" y="105" font-size="12" fill="#7c3aed">x</text>
+                                                        <text x="20" y="25" font-size="12" fill="#7c3aed">y</text>
+                                                        <defs>
+                                                            <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+                                                                <path d="M0,0 L0,6 L9,3 z" fill="#7c3aed" />
+                                                            </marker>
+                                                        </defs>
+                                                    </svg>
+                                                    <div class="small text-muted">Trajectoire animée d’un point mobile</div>
+                                                </div>
                         <h5 class="fw-bold mt-4 mb-3">I. Cours</h5>
                         <ul class="list-unstyled space-y-3">
                             <li class="mb-3 d-flex gap-3">
                                 <i data-lucide="check-circle" class="text-violet flex-shrink-0"></i>
-                                <span><b>Outils Vectoriels :</b> Produit vectoriel, gradient ($\vec{\nabla}$),
-                                    divergence.</span>
+                                <span><b>Outils Vectoriels :</b> Produit vectoriel, gradient ($\vec{\nabla}$), divergence.<br>
+                                <span class="text-muted small">Ces outils permettent de décrire les grandeurs physiques (vitesse, accélération, force) dans l’espace. Le produit vectoriel est utilisé pour calculer des moments ou des forces perpendiculaires, le gradient pour exprimer la variation spatiale d’une grandeur scalaire, et la divergence pour quantifier la variation d’un champ vectoriel (ex : flux sortant d’un volume).</span></span>
                             </li>
                             <li class="mb-3 d-flex gap-3">
                                 <i data-lucide="check-circle" class="text-violet flex-shrink-0"></i>
-                                <span><b>Coordonnées :</b> Cartésiennes ($x,y,z$), Cylindriques ($\rho, \phi, z$) et
-                                    Sphériques ($r, \theta, \phi$).</span>
+                                <span><b>Coordonnées :</b> Cartésiennes ($x,y,z$), Cylindriques ($\rho, \phi, z$) et Sphériques ($r, \theta, \phi$).<br>
+                                <span class="text-muted small">Le choix du système de coordonnées dépend de la symétrie du problème. Par exemple, les coordonnées cylindriques sont adaptées aux mouvements circulaires, tandis que les sphériques sont idéales pour les problèmes de gravitation ou d’électrostatique.</span></span>
                             </li>
                             <li class="mb-3 d-flex gap-3">
                                 <i data-lucide="check-circle" class="text-violet flex-shrink-0"></i>
-                                <span><b>Cinématique :</b> $\vec{v} = \frac{d\vec{OM}}{dt}$ et $\vec{a} =
-                                    \frac{d\vec{v}}{dt}$. Base de Frenet : $\vec{a} = \frac{dv}{dt} \vec{\tau} +
-                                    \frac{v^2}{R} \vec{n}$.</span>
+                                <span><b>Cinématique :</b> $\vec{v} = \frac{d\vec{OM}}{dt}$ et $\vec{a} = \frac{d\vec{v}}{dt}$. Base de Frenet : $\vec{a} = \frac{dv}{dt} \vec{\tau} + \frac{v^2}{R} \vec{n}$.<br>
+                                <span class="text-muted small">La cinématique étudie le mouvement sans s’intéresser aux causes. La base de Frenet permet de décomposer l’accélération en une composante tangentielle (variation de la vitesse) et une composante normale (changement de direction, liée au rayon de courbure).</span></span>
                             </li>
                         </ul>
                     </div>
@@ -335,14 +355,56 @@
                     <div class="glass-card p-5 h-100">
                         <div class="section-tag mb-3">Chapitre 2</div>
                         <h3 class="h4 fw-bold text-violet mb-4">Changements de Référentiels</h3>
+                                                <!-- Schéma Chapitre 2 : Référentiels -->
+                                                <div class="text-center mb-4">
+                                                    <svg width="220" height="120" viewBox="0 0 220 120">
+                                                        <!-- Référentiel fixe -->
+                                                        <line x1="40" y1="100" x2="120" y2="100" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrow2)" />
+                                                        <text x="125" y="105" font-size="12" fill="#7c3aed">x</text>
+                                                        <line x1="40" y1="100" x2="40" y2="40" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrow2)" />
+                                                        <text x="30" y="35" font-size="12" fill="#7c3aed">y</text>
+                                                        <text x="30" y="115" font-size="12" fill="#7c3aed">R</text>
+                                                        <!-- Référentiel mobile -->
+                                                        <g>
+                                                            <line x1="100" y1="80" x2="180" y2="80" stroke="#facc15" stroke-width="2" marker-end="url(#arrow1)" />
+                                                            <text x="185" y="85" font-size="12" fill="#facc15">x'</text>
+                                                            <line x1="100" y1="80" x2="100" y2="30" stroke="#facc15" stroke-width="2" marker-end="url(#arrow1)" />
+                                                            <text x="90" y="25" font-size="12" fill="#facc15">y'</text>
+                                                            <text x="90" y="90" font-size="12" fill="#facc15">R'</text>
+                                                        </g>
+                                                        <!-- Vecteur vitesse relative -->
+                                                        <line x1="100" y1="80" x2="140" y2="60" stroke="#22c55e" stroke-width="2" marker-end="url(#arrow3)" />
+                                                        <text x="145" y="60" font-size="12" fill="#22c55e">v<sub>r</sub></text>
+                                                        <!-- Vecteur entraînement -->
+                                                        <line x1="100" y1="80" x2="120" y2="100" stroke="#ef4444" stroke-width="2" marker-end="url(#arrow3)" />
+                                                        <text x="125" y="105" font-size="12" fill="#ef4444">v<sub>e</sub></text>
+                                                        <defs>
+                                                            <marker id="arrow1" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+                                                                <path d="M0,0 L0,6 L9,3 z" fill="#facc15" />
+                                                            </marker>
+                                                            <marker id="arrow2" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+                                                                <path d="M0,0 L0,6 L9,3 z" fill="#7c3aed" />
+                                                            </marker>
+                                                            <marker id="arrow3" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+                                                                <path d="M0,0 L0,6 L9,3 z" fill="#22c55e" />
+                                                            </marker>
+                                                        </defs>
+                                                    </svg>
+                                                    <div class="small text-muted">Deux référentiels (R et R'), vitesse relative et d’entraînement</div>
+                                                </div>
                         <h5 class="fw-bold mt-4 mb-3">I. Cours</h5>
                         <ul class="list-unstyled">
-                            <li class="mb-2"><b>Composition des Vitesses :</b> $\vec{V_a} = \vec{V_r} + \vec{V_e}$.</li>
-                            <li class="mb-2"><b>Composition des Accélérations :</b> $\vec{a_a} = \vec{a_r} + \vec{a_e} +
-                                \vec{a_c}$.</li>
-                            <li class="mb-2"><b>Acc. d'Entraînement :</b> $\vec{a_e} = \vec{a}(O') + \dot{\vec{\omega}}
-                                \wedge \vec{O'M} + \dots$</li>
-                            <li class="mb-2"><b>Acc. de Coriolis :</b> $\vec{a_c} = 2\vec{\omega} \wedge \vec{V_r}$.
+                            <li class="mb-2"><b>Composition des Vitesses :</b> $\vec{V_a} = \vec{V_r} + \vec{V_e}$<br>
+                                <span class="text-muted small">La vitesse absolue d’un point est la somme de sa vitesse relative dans le référentiel mobile et de la vitesse d’entraînement due au mouvement du référentiel lui-même.</span>
+                            </li>
+                            <li class="mb-2"><b>Composition des Accélérations :</b> $\vec{a_a} = \vec{a_r} + \vec{a_e} + \vec{a_c}$<br>
+                                <span class="text-muted small">L’accélération absolue comprend l’accélération relative, l’accélération d’entraînement (liée au mouvement du référentiel) et l’accélération de Coriolis (due à la rotation du référentiel).</span>
+                            </li>
+                            <li class="mb-2"><b>Acc. d'Entraînement :</b> $\vec{a_e} = \vec{a}(O') + \dot{\vec{\omega}} \wedge \vec{O'M} + \dots$<br>
+                                <span class="text-muted small">Cette accélération apparaît lorsque le référentiel d’étude est en mouvement par rapport à un référentiel galiléen. Elle dépend de l’accélération du point d’origine et de la variation de la rotation du référentiel.</span>
+                            </li>
+                            <li class="mb-2"><b>Acc. de Coriolis :</b> $\vec{a_c} = 2\vec{\omega} \wedge \vec{V_r}$<br>
+                                <span class="text-muted small">L’accélération de Coriolis intervient pour les référentiels en rotation et affecte la trajectoire des objets en mouvement (ex : déviation des vents sur Terre).</span>
                             </li>
                         </ul>
                     </div>
@@ -374,13 +436,45 @@
                     <div class="glass-card p-5 h-100">
                         <div class="section-tag mb-3">Chapitre 3</div>
                         <h3 class="h4 fw-bold text-violet mb-4">Dynamique du Point Matériel</h3>
+                                                <!-- Schéma Chapitre 3 : Forces et PFD -->
+                                                <div class="text-center mb-4">
+                                                    <svg width="220" height="120" viewBox="0 0 220 120">
+                                                        <!-- Point matériel -->
+                                                        <circle cx="110" cy="60" r="10" fill="#7c3aed" />
+                                                        <!-- Forces extérieures -->
+                                                        <line x1="110" y1="60" x2="170" y2="40" stroke="#facc15" stroke-width="3" marker-end="url(#arrowf)" />
+                                                        <text x="175" y="40" font-size="12" fill="#facc15">F<sub>ext</sub></text>
+                                                        <!-- Force d'inertie -->
+                                                        <line x1="110" y1="60" x2="60" y2="90" stroke="#ef4444" stroke-width="3" marker-end="url(#arrowf2)" />
+                                                        <text x="45" y="95" font-size="12" fill="#ef4444">f<sub>ie</sub></text>
+                                                        <!-- Accélération -->
+                                                        <line x1="110" y1="60" x2="110" y2="20" stroke="#22c55e" stroke-width="3" marker-end="url(#arrowf3)" />
+                                                        <text x="115" y="20" font-size="12" fill="#22c55e">a</text>
+                                                        <defs>
+                                                            <marker id="arrowf" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+                                                                <path d="M0,0 L0,6 L9,3 z" fill="#facc15" />
+                                                            </marker>
+                                                            <marker id="arrowf2" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+                                                                <path d="M0,0 L0,6 L9,3 z" fill="#ef4444" />
+                                                            </marker>
+                                                            <marker id="arrowf3" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+                                                                <path d="M0,0 L0,6 L9,3 z" fill="#22c55e" />
+                                                            </marker>
+                                                        </defs>
+                                                    </svg>
+                                                    <div class="small text-muted">Forces extérieures, force d’inertie et accélération</div>
+                                                </div>
                         <h5 class="fw-bold mt-4 mb-3">I. Cours</h5>
                         <ul class="list-unstyled">
-                            <li class="mb-2"><b>PFD :</b> $\sum \vec{F_{ext}} = m\vec{a_a}$ (R. Galiléen).</li>
-                            <li class="mb-2"><b>PFD (Non-Galiléen) :</b> $\sum \vec{F_{ext}} + \vec{f_{ie}} +
-                                \vec{f_{ic}} = m\vec{a_r}$.</li>
-                            <li class="mb-2"><b>Forces d'inertie :</b> $\vec{f_{ie}} = -m\vec{a_e}$ et $\vec{f_{ic}} =
-                                -m\vec{a_c}$.</li>
+                            <li class="mb-2"><b>PFD :</b> $\sum \vec{F_{ext}} = m\vec{a_a}$ (R. Galiléen)<br>
+                                <span class="text-muted small">Le Principe Fondamental de la Dynamique (PFD) relie la somme des forces extérieures appliquées à un point matériel à son accélération dans un référentiel galiléen.</span>
+                            </li>
+                            <li class="mb-2"><b>PFD (Non-Galiléen) :</b> $\sum \vec{F_{ext}} + \vec{f_{ie}} + \vec{f_{ic}} = m\vec{a_r}$<br>
+                                <span class="text-muted small">Dans un référentiel non galiléen, il faut ajouter les forces d’inertie (d’entraînement et de Coriolis) pour appliquer le PFD.</span>
+                            </li>
+                            <li class="mb-2"><b>Forces d'inertie :</b> $\vec{f_{ie}} = -m\vec{a_e}$ et $\vec{f_{ic}} = -m\vec{a_c}$<br>
+                                <span class="text-muted small">Les forces d’inertie sont fictives : elles n’existent que dans le référentiel non galiléen pour compenser les effets du mouvement du référentiel sur la dynamique du point.</span>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -641,6 +735,26 @@
 
     <!-- Bootstrap JS + Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            // Animation du point mobile sur la trajectoire (Chapitre 1)
+            window.addEventListener('DOMContentLoaded', function () {
+                var path = document.getElementById('traj-path');
+                var point = document.getElementById('moving-point');
+                if (path && point) {
+                    var length = path.getTotalLength();
+                    var t = 0;
+                    function animate() {
+                        t += 0.008;
+                        if (t > 1) t = 0;
+                        var pos = path.getPointAtLength(t * length);
+                        point.setAttribute('cx', pos.x);
+                        point.setAttribute('cy', pos.y);
+                        requestAnimationFrame(animate);
+                    }
+                    animate();
+                }
+            });
+        </script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // Init AOS
