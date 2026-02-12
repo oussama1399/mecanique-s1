@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valide ta Méca | kad_academia</title>
+
+    <!-- Bootstrap 5.3.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts: Inter & Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- AOS (Animate on Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- MathJax for Formulas -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --bg-light: #ffffff;
+            --violet-main: #7c3aed;
+            --violet-light: #8b5cf6;
+            --violet-dark: #6d28d9;
+            --yellow-main: #facc15;
+            --yellow-accent: #eab308;
+            --card-bg: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .brand-font {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* --- Custom Utilities --- */
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: var(--violet-light);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(124, 58, 237, 0.1);
+        }
+
+        .btn-premium {
+            background: linear-gradient(135deg, var(--violet-main), var(--violet-light));
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 1rem;
+            font-weight: 800;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.2);
+        }
+
+        .btn-premium:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 30px rgba(124, 58, 237, 0.4);
+            color: white;
+        }
+
+        .btn-yellow {
+            background: var(--yellow-main);
+            color: #1e293b;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 1rem;
+            font-weight: 800;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 8px 20px rgba(250, 204, 21, 0.2);
+        }
+
+        .btn-yellow:hover {
+            background: var(--yellow-accent);
+            transform: scale(1.05);
+            color: #1e293b;
+        }
+
+        .text-yellow {
+            color: var(--yellow-accent);
+        }
+
+        .text-violet {
+            color: var(--violet-main);
+        }
+
+        .bg-violet-soft {
+            background-color: #f5f3ff;
+        }
+
+        /* --- Hero Section --- */
+        .hero-section {
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 140px 0 100px;
+            background: radial-gradient(circle at 100% 0%, rgba(124, 58, 237, 0.05) 0%, #fff 50%);
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            color: #0f172a;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--violet-main), var(--violet-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- Section Styling --- */
+        .section-tag {
+            background: rgba(124, 58, 237, 0.2);
+            color: var(--violet-light);
+            padding: 0.5rem 1.2rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+        }
+
+        .math-zone {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 1.2rem;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            border-left: 6px solid var(--yellow-main);
+            overflow-x: auto;
+            font-size: 1.2rem;
+        }
+
+        .exercise-card {
+            border: 1px dashed rgba(250, 204, 21, 0.3);
+            padding: 2rem;
+            border-radius: 1.5rem;
+            background: rgba(250, 204, 21, 0.02);
+        }
+
+        /* --- WhatsApp Floating --- */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            background: #25d366;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        /* --- Footer --- */
+        .footer-brand {
+            font-size: 2rem;
+            letter-spacing: -1px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 100px 0 60px;
+            }
+
+            .math-zone {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- WhatsApp Floating Icon -->
+    <a href="https://wa.me/212634350272" class="whatsapp-float" target="_blank">
+        <i data-lucide="message-circle" color="white" size="32"></i>
+    </a>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top glass-card mx-3 mt-3 py-2 px-4 border-0">
+        <div class="container-fluid">
+            <a class="navbar-brand brand-font fw-bold fs-3 text-white" href="#">kad_academia</a>
+            <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+                <i data-lucide="menu"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto gap-3">
+                    <li class="nav-item"><a class="nav-link text-white-50 hover-text-white" href="#resume">Résumé</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link text-white-50" href="#exercices">Exercices</a></li>
+                    <li class="nav-item"><a class="nav-link text-white-50" href="#coaching">Session Ratt</a></li>
+                    <li class="nav-item mt-2 mt-lg-0"><a class="btn-yellow px-4 py-2"
+                            href="https://wa.me/212634350272">S'inscrire</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section text-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10" data-aos="zoom-out" data-aos-duration="1200">
+                    <div class="section-tag">Spécial Rattrapage S1</div>
+                    <h1 class="hero-title">
+                        Maîtrise la <span class="gradient-text">Mécanique du Point</span>
+                    </h1>
+                    <p class="fs-5 text-muted mb-5 mx-auto" style="max-width: 750px;">
+                        Par <b>kad_academia</b>. Un résumé complet, des formules clés et des exercices types pour
+                        valider ton module S1 filiere MI en toute confiance.
+                    </p>
+                    <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+                        <a href="#resume" class="btn-premium">Démarrer le Résumé</a>
+                        <a href="https://wa.me/212634350272"
+                            class="btn btn-outline-warning rounded-4 px-4 py-3 fw-bold">Besoin d'aide ? WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Detailed Summary Section -->
+    <section id="resume" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="display-5 fw-bold mb-3">Résumé Complet du Cours</h2>
+                <p class="text-muted">Tout ce qu'il faut savoir, des bases aux référentiels non galiléens.</p>
+                <div class="mx-auto"
+                    style="width: 100px; height: 5px; background: var(--yellow-main); border-radius: 10px;"></div>
+            </div>
+
+            <div class="row g-5">
+                <!-- Chapter 1 -->
+                <div class="col-lg-6" data-aos="fade-up">
+                    <div class="glass-card p-5 h-100">
+                        <div class="section-tag mb-3">Chapitre 1</div>
+                        <h3 class="h4 fw-bold text-violet mb-4">Outils Mathématiques et Cinématique</h3>
+                        <h5 class="fw-bold mt-4 mb-3">I. Cours</h5>
+                        <ul class="list-unstyled space-y-3">
+                            <li class="mb-3 d-flex gap-3">
+                                <i data-lucide="check-circle" class="text-violet flex-shrink-0"></i>
+                                <span><b>Outils Vectoriels :</b> Produit vectoriel, gradient ($\vec{\nabla}$),
+                                    divergence.</span>
+                            </li>
+                            <li class="mb-3 d-flex gap-3">
+                                <i data-lucide="check-circle" class="text-violet flex-shrink-0"></i>
+                                <span><b>Coordonnées :</b> Cartésiennes ($x,y,z$), Cylindriques ($\rho, \phi, z$) et
+                                    Sphériques ($r, \theta, \phi$).</span>
+                            </li>
+                            <li class="mb-3 d-flex gap-3">
+                                <i data-lucide="check-circle" class="text-violet flex-shrink-0"></i>
+                                <span><b>Cinématique :</b> $\vec{v} = \frac{d\vec{OM}}{dt}$ et $\vec{a} =
+                                    \frac{d\vec{v}}{dt}$. Base de Frenet : $\vec{a} = \frac{dv}{dt} \vec{\tau} +
+                                    \frac{v^2}{R} \vec{n}$.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Exercise 1 -->
+                <div class="col-lg-6" data-aos="fade-up">
+                    <div class="exercise-card h-100 p-5">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h4 class="h5 fw-bold">Excercice 1 : Mouvement Hélicoïdal</h4>
+                            <span class="badge bg-violet text-white">Classique MI</span>
+                        </div>
+                        <p class="small text-muted">$\rho=R, \phi=\omega t, z=h\phi$. Déterminer $\vec{OM}$, $\vec{V}$
+                            et $\vec{\gamma}$.</p>
+                        <button class="btn btn-sm btn-outline-violet mt-3" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#sol1">Voir Solution</button>
+                        <div class="collapse mt-3" id="sol1">
+                            <div class="p-4 bg-violet-soft rounded small">
+                                <b>Solution :</b><br>
+                                • $\vec{OM} = R\vec{e_\rho} + h\omega t\vec{k}$<br>
+                                • $\vec{V} = R\omega\vec{e_\phi} + h\omega\vec{k} \Rightarrow V =
+                                \omega\sqrt{R^2+h^2}$<br>
+                                • $\vec{\gamma} = -R\omega^2\vec{e_\rho}$ (Accélération centripète).
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chapter 2 -->
+                <div class="col-lg-6 order-lg-2" data-aos="fade-up">
+                    <div class="glass-card p-5 h-100">
+                        <div class="section-tag mb-3">Chapitre 2</div>
+                        <h3 class="h4 fw-bold text-violet mb-4">Changements de Référentiels</h3>
+                        <h5 class="fw-bold mt-4 mb-3">I. Cours</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><b>Composition des Vitesses :</b> $\vec{V_a} = \vec{V_r} + \vec{V_e}$.</li>
+                            <li class="mb-2"><b>Composition des Accélérations :</b> $\vec{a_a} = \vec{a_r} + \vec{a_e} +
+                                \vec{a_c}$.</li>
+                            <li class="mb-2"><b>Acc. d'Entraînement :</b> $\vec{a_e} = \vec{a}(O') + \dot{\vec{\omega}}
+                                \wedge \vec{O'M} + \dots$</li>
+                            <li class="mb-2"><b>Acc. de Coriolis :</b> $\vec{a_c} = 2\vec{\omega} \wedge \vec{V_r}$.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Exercise 2 -->
+                <div class="col-lg-6 order-lg-1" data-aos="fade-up">
+                    <div class="exercise-card h-100 p-5">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h4 class="h5 fw-bold">Excercice 2 : La Mouche sur le Disque</h4>
+                            <span class="badge bg-yellow-main text-dark">Important</span>
+                        </div>
+                        <p class="small text-muted">Disque tournant à $\omega$. Mouche M se déplace à $v_0$ sur un rayon
+                            $OA$. Calculer $\vec{V_a}$ et $\vec{a_a}$.</p>
+                        <button class="btn btn-sm btn-outline-violet mt-3" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#sol2">Voir Solution</button>
+                        <div class="collapse mt-3" id="sol2">
+                            <div class="p-4 bg-violet-soft rounded small">
+                                <b>Points clés :</b><br>
+                                • $\vec{V_r} = v_0\vec{e_\rho}$ | $\vec{V_e} = \omega v_0 t \vec{e_\phi}$<br>
+                                • $\vec{a_r} = \vec{0}$ | $\vec{a_e} = -\omega^2 v_0 t \vec{e_\rho}$ (Centripète)<br>
+                                • $\vec{a_c} = 2\omega v_0 \vec{e_\phi}$ (Coriolis)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chapter 3 -->
+                <div class="col-lg-6" data-aos="fade-up">
+                    <div class="glass-card p-5 h-100">
+                        <div class="section-tag mb-3">Chapitre 3</div>
+                        <h3 class="h4 fw-bold text-violet mb-4">Dynamique du Point Matériel</h3>
+                        <h5 class="fw-bold mt-4 mb-3">I. Cours</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><b>PFD :</b> $\sum \vec{F_{ext}} = m\vec{a_a}$ (R. Galiléen).</li>
+                            <li class="mb-2"><b>PFD (Non-Galiléen) :</b> $\sum \vec{F_{ext}} + \vec{f_{ie}} +
+                                \vec{f_{ic}} = m\vec{a_r}$.</li>
+                            <li class="mb-2"><b>Forces d'inertie :</b> $\vec{f_{ie}} = -m\vec{a_e}$ et $\vec{f_{ic}} =
+                                -m\vec{a_c}$.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Exercise 3 -->
+                <div class="col-lg-6" data-aos="fade-up">
+                    <div class="exercise-card h-100 p-5">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h4 class="h5 fw-bold">Excercice 3 : Pendule dans un Wagon</h4>
+                            <span class="badge bg-danger text-white">Exam Classique</span>
+                        </div>
+                        <p class="small text-muted">Wagon en accélération $a_0 \vec{i}$. Déterminer l'angle $\alpha$
+                            d'équilibre du pendule dans le wagon.</p>
+                        <button class="btn btn-sm btn-outline-violet mt-3" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#sol3">Voir Solution</button>
+                        <div class="collapse mt-3" id="sol3">
+                            <div class="p-4 bg-violet-soft rounded small">
+                                <b>Solution :</b><br>
+                                • Forces dans R' : $\vec{P}$ , $\vec{T}$, $\vec{F_{ie}} = -ma_0 \vec{i}$.<br>
+                                • Équilibre : $\vec{P} + \vec{T} + \vec{F_{ie}} = \vec{0}$.<br>
+                                • Projections : $T\sin\alpha = ma_0$ et $T\cos\alpha = mg$<br>
+                                • $\tan\alpha = a_0/g \Rightarrow \alpha = \arctan(a_0/g)$.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methodology Section -->
+    <section id="methodo" class="py-5 bg-violet-soft">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h2 class="display-6 fw-bold mb-4">La Méthodologie <span class="text-violet">kad_academia</span>
+                    </h2>
+                    <p class="text-muted mb-5">Appliquer la bonne méthode, c'est 80% du travail. Voici comment résoudre
+                        n'importe quel problème de méca en 5 étapes :</p>
+
+                    <div class="space-y-4">
+                        <div class="d-flex gap-4 mb-4">
+                            <div class="flex-shrink-0 bg-yellow-main text-dark fw-bold rounded-circle d-flex align-items-center justify-content-center"
+                                style="width: 35px; height: 35px;">1</div>
+                            <div>
+                                <h5 class="fw-bold mb-1">Définir le Système</h5>
+                                <p class="small text-muted">Isoler l'objet (point matériel M) que l'on étudie.</p>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-4 mb-4">
+                            <div class="flex-shrink-0 bg-yellow-main text-dark fw-bold rounded-circle d-flex align-items-center justify-content-center"
+                                style="width: 35px; height: 35px;">2</div>
+                            <div>
+                                <h5 class="fw-bold mb-1">Choisir le Référentiel</h5>
+                                <p class="small text-muted">Est-il galiléen ? Si non, identifier l'accélération
+                                    d'entraînement.</p>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-4 mb-4">
+                            <div class="flex-shrink-0 bg-yellow-main text-dark fw-bold rounded-circle d-flex align-items-center justify-content-center"
+                                style="width: 35px; height: 35px;">3</div>
+                            <div>
+                                <h5 class="fw-bold mb-1">Bilan des Forces</h5>
+                                <p class="small text-muted">Forces réelles + Forces d'inertie (si $R$ est non galiléen).
+                                </p>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-4 mb-4">
+                            <div class="flex-shrink-0 bg-yellow-main text-dark fw-bold rounded-circle d-flex align-items-center justify-content-center"
+                                style="width: 35px; height: 35px;">4</div>
+                            <div>
+                                <h5 class="fw-bold mb-1">Projection sur une Base</h5>
+                                <p class="small text-muted">Choisir la base la plus simple (souvent cylindrique ou
+                                    Frenet).</p>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-4">
+                            <div class="flex-shrink-0 bg-yellow-main text-dark fw-bold rounded-circle d-flex align-items-center justify-content-center"
+                                style="width: 35px; height: 35px;">5</div>
+                            <div>
+                                <h5 class="fw-bold mb-1">Intégration & Résolution</h5>
+                                <p class="small text-muted">Passer de l'accélération à la vitesse, puis à la position
+                                    ($OM$).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 offset-lg-1 mt-5 mt-lg-0" data-aos="fade-left">
+                    <div class="p-5 bg-white rounded-4 shadow-sm border border-secondary border-opacity-10 text-center">
+                        <i data-lucide="lightbulb" size="60" class="text-yellow mb-4"></i>
+                        <h4 class="fw-bold mb-3">Conseil de Tuteur</h4>
+                        <p class="text-muted italic">"Ne commence jamais tes calculs sans avoir fait de schéma. Un bon
+                            schéma avec les vecteurs bien placés évite 90% des erreurs de signe classiques."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Exam Tips Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="glass-card p-5 border-violet">
+                <h3 class="h3 fw-bold mb-5 text-center">La Checklist "Zéro Faute" en Examen</h3>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <i data-lucide="shield-check" class="text-violet mb-3" size="32"></i>
+                            <h5 class="fw-bold">Unités SI</h5>
+                            <p class="small text-muted">Vérifie que tes masses sont en kg, longueurs en m, et angles en
+                                radians.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <i data-lucide="target" class="text-violet mb-3" size="32"></i>
+                            <h5 class="fw-bold">Homogénéité</h5>
+                            <p class="small text-muted">Tes formules finales doivent être cohérentes (ne pas sommer des
+                                m avec des m/s).</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <i data-lucide="clock" class="text-violet mb-3" size="32"></i>
+                            <h5 class="fw-bold">Gestion du Temps</h5>
+                            <p class="small text-muted">Passe au mouvement énergétique si tu bloques sur les projections
+                                de forces.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Exercises Section -->
+    <section id="exercices" class="py-5 bg-violet bg-opacity-10">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="display-6 fw-bold mb-3">Entraîne-toi : Exercices Types</h2>
+                <p class="text-muted">Des classiques qui tombent souvent en rattrapage.</p>
+            </div>
+
+            <div class="row g-4 justify-content-center">
+                <!-- Exercice 1 -->
+                <div class="col-lg-5" data-aos="flip-left">
+                    <div class="exercise-card">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h4 class="h5 fw-bold">1. Le Pendule dans un Train</h4>
+                            <span class="badge bg-warning text-dark">Niveau Exam</span>
+                        </div>
+                        <p class="small text-muted">Un train accélère horizontalement avec $\vec{a} = a_0 \vec{i}$. Un
+                            pendule à l'intérieur s'incline d'un angle $\theta$.</p>
+                        <p class="small fw-bold mt-3">Question :</p>
+                        <p class="small text-muted italic">Calculer l'angle d'équilibre $\theta$ en utilisant les forces
+                            d'inertie dans le référentiel du train.</p>
+                    </div>
+                </div>
+                <!-- Exercice 2 -->
+                <div class="col-lg-5" data-aos="flip-right">
+                    <div class="exercise-card">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h4 class="h5 fw-bold">2. Point sur un Cerceau</h4>
+                            <span class="badge bg-danger">Difficile</span>
+                        </div>
+                        <p class="small text-muted">Un cerceau de rayon $R$ tourne à $\omega$ constant autour de son axe
+                            vertical. Une perle coulisse sans frottement sur le cerceau.</p>
+                        <p class="small fw-bold mt-3">Question :</p>
+                        <p class="small text-muted italic">Déterminer l'expression de l'accélération de Coriolis et de
+                            l'énergie potentielle effective.</p>
+                    </div>
+                </div>
+                <!-- Exercice 3 -->
+                <div class="col-lg-5" data-aos="flip-left">
+                    <div class="exercise-card">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h4 class="h5 fw-bold">3. Mouvement à Force Centrale</h4>
+                            <span class="badge bg-info text-dark">Classique</span>
+                        </div>
+                        <p class="small text-muted">Étudier le mouvement d'une planète autour d'une étoile sous l'effet
+                            de la gravitation $\vec{F} = -G\frac{Mm}{r^2}\vec{e_r}$.</p>
+                        <p class="small fw-bold mt-3">Question :</p>
+                        <p class="small text-muted italic">Montrer la conservation du moment cinétique et établir
+                            l'équation de la trajectoire (Conique).</p>
+                    </div>
+                </div>
+                <!-- Exercice 4 -->
+                <div class="col-lg-5" data-aos="flip-right">
+                    <div class="exercise-card">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h4 class="h5 fw-bold">4. Puissance et Frottements</h4>
+                            <span class="badge bg-success text-white">Application</span>
+                        </div>
+                        <p class="small text-muted">Un solide glisse sur un plan incliné rugueux avec un coefficient de
+                            frottement dissipatif $f = \mu N$.</p>
+                        <p class="small fw-bold mt-3">Question :</p>
+                        <p class="small text-muted italic">Calculer la puissance dissipée par frottement et la vitesse
+                            finale après une distance $d$ via le TEM.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <p class="text-muted">Tu veux les corrections détaillées ?</p>
+                <a href="https://wa.me/212634350272" class="btn btn-yellow fs-5">Obtenir les Corrections 📚</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conversion / Coaching Section -->
+    <section id="coaching" class="py-5 my-5">
+        <div class="container" data-aos="zoom-in">
+            <div class="glass-card p-5 text-center"
+                style="background: linear-gradient(135deg, rgba(124, 58, 237, 0.3), rgba(250, 204, 21, 0.05)); border-color: rgba(250, 204, 21, 0.2);">
+                <h2 class="display-5 fw-bold mb-4">Besoin d'un Accompagnement Personnalisé ?</h2>
+                <p class="fs-5 text-muted mb-5 mx-auto" style="max-width: 700px;">
+                    S'il te reste quelques jours avant le rattrapage, profites d'une séance de <b>remise à niveau
+                        intensive</b> avec nos tuteurs. On revoit l'essentiel et on traite les anciens examens.
+                </p>
+                <div class="d-flex flex-wrap justify-content-center gap-4">
+                    <div class="text-center">
+                        <h3 class="h2 fw-black text-yellow">1-on-1</h3>
+                        <p class="small text-muted">Séance privée</p>
+                    </div>
+                    <div class="vr mx-3 d-none d-md-block"></div>
+                    <div class="text-center">
+                        <h3 class="h2 fw-black text-yellow">Support 24/7</h3>
+                        <p class="small text-muted">Via WhatsApp</p>
+                    </div>
+                </div>
+                <a href="https://wa.me/212634350272" class="btn-yellow mt-5 px-5 py-4 fs-4">
+                    <i data-lucide="zap" class="me-2"></i> Réserver ma Séance
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-5 border-top border-secondary border-opacity-25 mt-5">
+        <div class="container">
+            <div class="row align-items-center g-4">
+                <div class="col-md-4 text-center text-md-start">
+                    <span class="brand-font fw-bold footer-brand text-yellow">kad_academia</span>
+                </div>
+                <div class="col-md-4">
+                    <div class="d-flex justify-content-center gap-4">
+                        <a href="#" class="text-muted hover:text-yellow transition-all"><i
+                                data-lucide="instagram"></i></a>
+                        <a href="#" class="text-muted hover:text-yellow transition-all"><i data-lucide="music"></i></a>
+                        <a href="https://wa.me/212634350272" class="text-muted hover:text-yellow transition-all"><i
+                                data-lucide="message-circle"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center text-md-end">
+                    <p class="text-muted small m-0">&copy; 2026 kad_academia. Éducation d'excellence.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS + Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Init AOS
+        AOS.init({ duration: 1000, once: true });
+
+        // Init Lucide
+        lucide.createIcons();
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
